@@ -3,6 +3,7 @@
 
 typedef struct _lista {
     void *item;
+    int cod_ibge;
     struct _lista *proximo;
 } tLista;
 
@@ -26,11 +27,11 @@ void rotacao_dir(tNode **pnode);
 void rotacao_esq(tNode **pnode);
 tNode ** sucessor(tNode **pnode);
 void construir_avl(tArv *arv, double (*cmp)(void *, void *));
-void inserir_avl_node(tArv *arv, tNode **pnode, tNode *pai, void *item);
-void inserir_avl(tArv *arv, void *item);
+void inserir_avl_node(tArv *arv, tNode **pnode, tNode *pai, void *item, int cod_ibge);
+void inserir_avl(tArv *arv, void *item, int cod_ibge);
 void rebalancear_avl(tNode **pnode);
 void remover_avl_node(tArv *arv, tNode **pnode, void *item);
 void remover_avl(tArv *arv, void *item);
-void inserir_lista(tLista **plista, void *item);
+void inserir_lista(tLista **plista, void *item, int cod_ibge);
 
 #endif

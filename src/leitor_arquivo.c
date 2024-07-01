@@ -21,7 +21,7 @@ void substituir_virgula(char *inicio_linha){
         }
 }
 
-void leitor(FILE *arquivo, tHash *hash_cod){
+void leitor(FILE *arquivo, tHash *hash_cod, tArv *arv_nome, tArv *arv_ddd, tArv *arv_lat, tArv *arv_long, tArv *arv_uf){
     char linha[TAM_LINHA];
     tMunicipio *cidade;
 

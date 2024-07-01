@@ -106,7 +106,7 @@ void construir_avl(tArv *arv, double (*cmp)(void *, void *)) {
 }
 
 // função pra inserir nó na árvore
-void inserir_avl_node(tArv *arv, tNode **pnode, tNode *pai, void *item) {
+void inserir_avl_node(tArv *arv, tNode **pnode, tNode *pai, void *item, int cod_ibge) {
     if (*pnode == NULL) { // se a árvore estiver vazia
         *pnode = (tNode *) malloc(sizeof(tNode)); // cria a raíz
  
@@ -116,19 +116,19 @@ void inserir_avl_node(tArv *arv, tNode **pnode, tNode *pai, void *item) {
         (*pnode)->h = 0;
 
         (*pnode)->lista_enc = NULL;
-        inserir_lista(&(*pnode)->lista_enc, item); // insere o item na lista encadeada do nó
+        inserir_lista(&(*pnode)->lista_enc, item, cod_ibge); // insere o item na lista encadeada do nó
     }
 
     else if ((*pnode)->lista_enc->item - item > 0) { // se o item a ser inserido for menor que o item do nó da árvore
-        inserir_avl_node(arv, &(*pnode)->esq, *pnode, item); // vai para o lado esquerdo da árvore
+        inserir_avl_node(arv, &(*pnode)->esq, *pnode, item, cod_ibge); // vai para o lado esquerdo da árvore
     }
     
     else if ((*pnode)->lista_enc->item - item < 0) { // se o item a ser inserido for maior que o item do nó da árvore
-        inserir_avl_node(arv, &(*pnode)->dir, *pnode, item); // vai para o lado direito da árvore
+        inserir_avl_node(arv, &(*pnode)->dir, *pnode, item, cod_ibge); // vai para o lado direito da árvore
     }
 
     else { // se for igual ao item do nó, insere na lista encadeada do nó
-        inserir_lista(&(*pnode)->lista_enc, item);
+        inserir_lista(&(*pnode)->lista_enc, item, cod_ibge);
     }
 
     (*pnode)->h = max(altura((*pnode)->esq), altura((*pnode)->dir)) + 1; // aumenta em 1 a altura da árvore
@@ -136,8 +136,8 @@ void inserir_avl_node(tArv *arv, tNode **pnode, tNode *pai, void *item) {
 }
 
 // função abstraída de inserção na árvore
-void inserir_avl(tArv *arv, void *item) {
-    inserir_avl_node(arv, &arv->raiz, NULL, item); // manda a raíz da árvore como primeiro nó
+void inserir_avl(tArv *arv, void *item, int cod_ibge) {
+    inserir_avl_node(arv, &arv->raiz, NULL, item, cod_ibge); // manda a raíz da árvore como primeiro nó
 }
 
 // função para rebalancear uma (sub)árvore
@@ -237,16 +237,17 @@ void remover_avl(tArv *arv, void *item) {
 
 
 // função pra inserir item na lista encadeada
-void inserir_lista(tLista **plista, void *item) {
+void inserir_lista(tLista **plista, void *item, int cod_ibge) {
     if (*plista == NULL) { // se a lista estiver vazia, cria uma nova lista
         *plista = (tLista *) malloc(sizeof(tLista));
 
         (*plista)->item = item;
         (*plista)->proximo = NULL;
+        (*plista)->cod_ibge = cod_ibge;
     }
 
     else { // se não, vai até o final da lista e insere
-        inserir_lista(&(*plista)->proximo, item);
+        inserir_lista(&(*plista)->proximo, item, cod_ibge);
     }
 }
 

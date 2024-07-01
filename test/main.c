@@ -47,4 +47,5 @@ int main(){
     FILE *arquivo = fopen("municipios.json", "r");
     leitor(arquivo, &hash_cod);
 
+    fclose(arquivo);
 }
