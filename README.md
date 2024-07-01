@@ -1,4 +1,4 @@
-# Trabalho 1 de Estruturas de Dados
+# Trabalho 2 de Estruturas de Dados
 O trabalho consiste em adaptar a AVL para que ela suporte range query (busca por intervalos). 
 
 Considerando a base dados https://github.com/kelvins/municipios-brasileiros/blob/main/json/municipios.json, com esta estrutura adaptada você conseguirá fazer buscas por intervalos. Por exemplo retornar todas as cidades que possuem DDD entre 15 e 20. Retornar todas as cidades que possuem latitude entre -31 e -34 e longitude entre - 50 e -54, ou mesmo fazer combinações entre latitude, longitude e DDD. 
